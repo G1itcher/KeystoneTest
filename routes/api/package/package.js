@@ -2,9 +2,6 @@ var keystone = require('keystone');
 
 exports = module.exports = function (req, res) {
 
-	//var view = new keystone.View(req, res);
-	//var locals = res.locals;
-	//console.log("wregfw")
 	var email = req.query.email;
 	if(email){
 		var decodedEmail = decodeURI(email);
@@ -21,5 +18,8 @@ exports = module.exports = function (req, res) {
 				}
 			})
 		
+	}
+	else{
+		return res.apiResponse({package:"none"});
 	}
 };
