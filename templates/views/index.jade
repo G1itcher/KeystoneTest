@@ -29,3 +29,22 @@ block content
 		hr
 		p Remember to <a href='https://github.com/keystonejs/keystone' target='_blank'>Star KeystoneJS on GitHub</a> and
 			| <a href='https://twitter.com/keystonejs' target='_blank'>follow @keystonejs</a> on twitter for updates.
+		input(type="text", id="LogErrorBox", name="LogError", placeholder="Test Log Message")
+		button(type="submit" id="testLog") Submit Log
+block js
+	script.
+		$("#testLog").click(function(){
+			logger.info($("#LogErrorBox").val() || "No Log Entered");
+		})
+
+		$(document).ready(function(){
+			var appender = JL.createAjaxAppender("appender");
+			appender.setOptions({
+				"url":"/api/logging"
+			});
+
+			logger = JL();
+			logger.setOptions({
+				"appenders": [appender]
+			});
+		})
